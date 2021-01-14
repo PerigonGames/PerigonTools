@@ -18,5 +18,10 @@ namespace PerigonGames
         {
             
         }
+
+        public static void ResetTransform(this Transform t)
+        {
+            
+        }
     }
 }
