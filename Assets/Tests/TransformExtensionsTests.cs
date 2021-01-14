@@ -166,7 +166,7 @@ namespace Tests
             cube.transform.rotation = rotation;
 
             //When
-            cube.transform.ResetScale();
+            cube.transform.ResetTransform();
 
             //Then
             Assert.AreEqual(Vector3.zero, cube.transform.position, "Cube Position Vector3.zero");
