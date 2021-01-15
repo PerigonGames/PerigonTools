@@ -60,7 +60,7 @@ namespace Tests
             var actualResult = array.IsNullOrEmpty();
             
             //Assert
-            Assert.True(actualResult);
+            Assert.False(actualResult);
         }
 
         [Test]
@@ -143,7 +143,7 @@ namespace Tests
             var actualResult = list.IsNullOrEmpty();
             
             //Assert
-            Assert.True(actualResult);
+            Assert.False(actualResult);
         }
         
         [Test]
