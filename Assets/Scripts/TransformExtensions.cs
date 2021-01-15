@@ -66,7 +66,7 @@ namespace PerigonGames
             Sample Input: object.Transform
             Expected Output: Rotation, Position, Scale should be reset
          */
-        public static void ResetTransform(this Transform t)
+        public static void Reset(this Transform t)
         {
             t.ResetPosition();
             t.ResetScale();
@@ -79,11 +79,11 @@ namespace PerigonGames
             Sample Input: object.Transform
             Expected Output: Local rotation, Local position, Scale should be reset
          */
-        public static void ResetLocalTransform(this Transform t)
+        public static void ResetLocal(this Transform t)
         {
-            t.ResetPosition();
+            t.ResetLocalPosition();
             t.ResetScale();
-            t.ResetRotation();
+            t.ResetLocalRotation();
         }
     }
 }
