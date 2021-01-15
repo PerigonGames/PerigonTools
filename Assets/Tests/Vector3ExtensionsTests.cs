@@ -9,7 +9,6 @@ namespace Tests
 {
     public class Vector3ExtensionsTests
     {
-        // A Test behaves as an ordinary method
         [Test]
         public void ResetToVector3Zero()
         {
