@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NUnit.Framework;
 using PerigonGames;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Tests
@@ -48,10 +49,16 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail();
+                }
             }
-            
+
             //Assert
             foreach (var item in list)
             {
@@ -74,14 +81,20 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail();
+                }
             }
-            
+
             //Assert
             foreach (var item in list)
             {
-                if (item != "Hello" || item != "World" || item != "C#" || item != "Unity")
+                if (item != "Hello" && item != "World" && item != "C#" && item != "Unity")
                 {
                     Assert.Fail();
                 }
@@ -106,7 +119,7 @@ namespace Tests
             actualResult = _random.NextTryGetElement(array, out actualInt);
             
             //Assert
-            Assert.AreEqual(1, actualInt, "The int should not have changed values");
+            Assert.AreEqual(default(int), actualInt, "The int should have changed back to its default value");
             Assert.IsFalse(actualResult, "Empty Array should return False");
         }
 
@@ -114,7 +127,7 @@ namespace Tests
         public void TryGetRandomElementWithNullArray()
         {
             //Arrange
-            var array = new int[] {};
+            var array = new int[1];
             array = null;
             var actualResult = true;
             var actualInt = 1;
@@ -123,8 +136,8 @@ namespace Tests
             actualResult = _random.NextTryGetElement(array, out actualInt);
             
             //Assert
-            Assert.AreEqual(1, actualInt, "The int should not have changed values");
-            Assert.IsFalse(actualResult, "Empty Array should return False");
+            Assert.AreEqual(default(int), actualInt, "The int should have changed back to its default value");
+            Assert.IsFalse(actualResult, "Null Array should return False");
         }
         
         [Test]
@@ -137,14 +150,20 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail();
+                }
             }
             
             //Assert
             foreach (var item in list)
             {
-                if (item != "Hello" || item != "World" || item != null)
+                if (item != "Hello" && item != "C#" && item != null)
                 {
                     Assert.Fail();
                 }
@@ -152,7 +171,7 @@ namespace Tests
 
             Assert.IsTrue(list.Contains(null));
             Assert.IsTrue(list.Contains("Hello"));
-            Assert.IsTrue(list.Contains("World"));
+            Assert.IsTrue(list.Contains("C#"));
         }
         
         [Test]

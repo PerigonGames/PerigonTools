@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using PerigonGames;
@@ -168,89 +167,6 @@ namespace Tests
 
             //Act
             var actualResult = list.IsNullOrEmpty();
-            
-            //Assert
-            Assert.True(actualResult);
-        }
-        #endregion
-        
-        #region ArrayList
-        [Test]
-        public void TestIsNullOrEmptyIntArrayList()
-        {
-            // Arrange
-            var arrayList = new ArrayList() {1, 2, 3};
-            
-            // Act
-            var actualResult = arrayList.IsNullOrEmpty();
-            
-            // Assert
-            Assert.False(actualResult);
-        }
-
-        [Test]
-        public void TestIsNullOrEmptyStringArrayList()
-        {
-            //Arrange
-            var arrayList = new ArrayList() {"Hello"};
-            
-            //Act
-            var actualResult = arrayList.IsNullOrEmpty();
-            
-            // Assert
-            Assert.False(actualResult);
-        }
-
-        [Test]
-        public void TestIsNullOrEmptyDoubleArrayList()
-        {
-            //Arrange
-            Double x = 1;
-            var array = new ArrayList() { x };
-            
-            //Act
-            var actualResult = array.IsNullOrEmpty();
-            
-            //Assert
-            Assert.False(actualResult);
-        }
-        
-        [Test]
-        public void TestIsNullOrEmptyOnNullStringArrayList()
-        {
-            //Arrange
-            String first = null;
-            String second = null;
-            var array =  new ArrayList() {first, second};
-            
-            //Act
-            var actualResult = array.IsNullOrEmpty();
-            
-            //Assert
-            Assert.True(actualResult);
-        }
-
-        [Test]
-        public void TestIsNullOrEmptyWithNullArrayList()
-        {   
-            // Arrange
-            ArrayList array = null;
-            
-            //Act
-            var actualResult = array.IsNullOrEmpty();
-            
-            //Assert
-            Assert.True(actualResult);
-        }
-
-        [Test]
-        public void TestIsNullOrEmptyWithEmptyArrayList()
-        {
-            // Arrange
-            ArrayList array = new ArrayList();
-            
-            //Act
-            var actualResult = array.IsNullOrEmpty();
             
             //Assert
             Assert.True(actualResult);

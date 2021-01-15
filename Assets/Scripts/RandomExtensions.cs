@@ -25,8 +25,14 @@ namespace PerigonGames
          */
         public static bool NextTryGetElement<T>(this Random random, IList<T> list, out T element)
         {
-            element = list[0];
-            return false;
+            if (list.IsNullOrEmpty() || random == null)
+            {
+                element = default;
+                return false;
+            }
+
+            element = list[random.Next(0, list.Count)];
+            return true;
         }
     }
 }
