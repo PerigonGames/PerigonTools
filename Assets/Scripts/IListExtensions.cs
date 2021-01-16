@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace PerigonGames
 {
@@ -11,9 +12,9 @@ namespace PerigonGames
             Sample Input: null
             Expected Output: true
          */
-        public static bool IsNullOrEmpty(this IList list)
+        public static bool IsNullOrEmpty<T>(this IList<T> list)
         {
-            return false;
+            return list == null || list.Count == 0;
         }
     }
 }

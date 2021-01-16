@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using NUnit.Framework;
 using PerigonGames;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Tests
@@ -48,10 +50,16 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty array");
+                }
             }
-            
+
             //Assert
             foreach (var item in list)
             {
@@ -74,14 +82,20 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty array");
+                }
             }
-            
+
             //Assert
             foreach (var item in list)
             {
-                if (item != "Hello" || item != "World" || item != "C#" || item != "Unity")
+                if (item != "Hello" && item != "World" && item != "C#" && item != "Unity")
                 {
                     Assert.Fail();
                 }
@@ -91,7 +105,6 @@ namespace Tests
             Assert.IsTrue(list.Contains("Hello"));
             Assert.IsTrue(list.Contains("World"));
             Assert.IsTrue(list.Contains("Unity"));
-            Assert.Pass();
         }
         
         [Test]
@@ -100,13 +113,13 @@ namespace Tests
             //Arrange
             var array = new int[] {};
             var actualResult = true;
-            var actualInt = 1;
+            var actualInt = 10;
 
             //Act
             actualResult = _random.NextTryGetElement(array, out actualInt);
             
             //Assert
-            Assert.AreEqual(1, actualInt, "The int should not have changed values");
+            Assert.AreEqual(default(int), actualInt, "The int should have changed back to its default value");
             Assert.IsFalse(actualResult, "Empty Array should return False");
         }
 
@@ -114,17 +127,17 @@ namespace Tests
         public void TryGetRandomElementWithNullArray()
         {
             //Arrange
-            var array = new int[] {};
+            var array =  new int[] {};
             array = null;
             var actualResult = true;
-            var actualInt = 1;
+            var actualInt = 10;
 
             //Act
             actualResult = _random.NextTryGetElement(array, out actualInt);
             
             //Assert
-            Assert.AreEqual(1, actualInt, "The int should not have changed values");
-            Assert.IsFalse(actualResult, "Empty Array should return False");
+            Assert.AreEqual(default(int), actualInt, "The int should have changed back to its default value");
+            Assert.IsFalse(actualResult, "NextTryGetElement should return False");
         }
         
         [Test]
@@ -137,14 +150,20 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty array");
+                }
             }
             
             //Assert
             foreach (var item in list)
             {
-                if (item != "Hello" || item != "World" || item != null)
+                if (item != "Hello" && item != "C#" && item != null)
                 {
                     Assert.Fail();
                 }
@@ -152,7 +171,7 @@ namespace Tests
 
             Assert.IsTrue(list.Contains(null));
             Assert.IsTrue(list.Contains("Hello"));
-            Assert.IsTrue(list.Contains("World"));
+            Assert.IsTrue(list.Contains("C#"));
         }
         
         [Test]
@@ -166,10 +185,16 @@ namespace Tests
             //Act
             for (int i = 0; i < 100; i++)
             {
-                _random.NextTryGetElement(array, out var actualResult);
-                list.Add(actualResult);
+                if (_random.NextTryGetElement(array, out var actualResult))
+                {
+                    list.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty array");
+                }
             }
-            
+
             //Assert
             foreach (var item in list)
             {
@@ -184,9 +209,173 @@ namespace Tests
         #endregion
         
         #region GetRandomElementList
-        #endregion
         
-        #region GetRandomElementArrayList
+        public void TryGetRandomElementWithListOfInt()
+        {
+            //Arrange
+            var list = new List<int> {1, 2, 3};
+            var outputList = new List<int>();
+
+            //Act
+            for (int i = 0; i < 100; i++)
+            {
+                if (_random.NextTryGetElement(list, out var actualResult))
+                {
+                    outputList.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail();
+                }
+            }
+
+            //Assert
+            foreach (var item in outputList)
+            {
+                if (item < 1 || item > 3)
+                {
+                    Assert.Fail();
+                }
+            }
+
+            Assert.Pass();
+        }
+
+        [Test]
+        public void TryGetRandomElementWithListOfString()
+        {
+            //Arrange
+            var list = new List<string> {"Hello", "World", "C#", "Unity"};
+            var outputList = new List<string>();
+
+            //Act
+            for (int i = 0; i < 100; i++)
+            {
+                if (_random.NextTryGetElement(list, out var actualResult))
+                {
+                    outputList.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty list");
+                }
+            }
+
+            //Assert
+            foreach (var item in outputList)
+            {
+                if (item != "Hello" && item != "World" && item != "C#" && item != "Unity")
+                {
+                    Assert.Fail();
+                }
+            }
+            
+            Assert.IsTrue(outputList.Contains("C#"));
+            Assert.IsTrue(outputList.Contains("Hello"));
+            Assert.IsTrue(outputList.Contains("World"));
+            Assert.IsTrue(outputList.Contains("Unity"));
+        }
+        
+        [Test]
+        public void TryGetRandomElementWithEmptyList()
+        {
+            //Arrange
+            var list = new List<int>();
+            var actualResult = true;
+            var actualInt = 10;
+
+            //Act
+            actualResult = _random.NextTryGetElement(list, out actualInt);
+            
+            //Assert
+            Assert.AreEqual(default(int), actualInt, "The int should have changed back to its default value");
+            Assert.IsFalse(actualResult, "Empty Array should return False");
+        }
+
+        [Test]
+        public void TryGetRandomElementWithNullList()
+        {
+            //Arrange
+            var list = new List<int>();
+            list = null;
+            var actualResult = true;
+            var actualInt = 10;
+
+            //Act
+            actualResult = _random.NextTryGetElement(list, out actualInt);
+            
+            //Assert
+            Assert.AreEqual(default(int), actualInt, "The int should have changed back to its default value");
+            Assert.IsFalse(actualResult, "NextTryGetElement should return False");
+        }
+        
+        [Test]
+        public void TryGetRandomElementWithListOfStringWithSomeNull()
+        {
+            //Arrange
+            var list = new List<string> {"Hello", null, "C#", null};
+            var outputList = new List<string>();
+
+            //Act
+            for (int i = 0; i < 100; i++)
+            {
+                if (_random.NextTryGetElement(list, out var actualResult))
+                {
+                    outputList.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty list");
+                }
+            }
+            
+            //Assert
+            foreach (var item in outputList)
+            {
+                if (item != "Hello" && item != "C#" && item != null)
+                {
+                    Assert.Fail();
+                }
+            }
+
+            Assert.IsTrue(outputList.Contains(null));
+            Assert.IsTrue(outputList.Contains("Hello"));
+            Assert.IsTrue(outputList.Contains("C#"));
+        }
+        
+        [Test]
+        public void TryGetRandomElementWithListOfStringWithAllNull()
+        {
+            //Arrange
+            string x = null;
+            var list = new List<string> { x, x, x, x };
+            var outputList = new List<string>();
+
+            //Act
+            for (int i = 0; i < 100; i++)
+            {
+                if (_random.NextTryGetElement(list, out var actualResult))
+                {
+                    outputList.Add(actualResult);
+                }
+                else
+                {
+                    Assert.Fail("NextTryGetElement should not return false with a non-null, non-empty list");
+                }
+            }
+
+            //Assert
+            foreach (var item in outputList)
+            {
+                if (item != null)
+                {
+                    Assert.Fail();
+                }
+            }
+
+            Assert.IsTrue(outputList.Contains(null));
+        }
+        
         #endregion
     }
 }

@@ -12,7 +12,18 @@ namespace PerigonGames
          */
         public static void ResetPosition(this Transform t)
         {
-            //TODO
+            t.position = Vector3.zero;
+        }
+        
+        /*
+            Explanation of what it does: resets local positon
+            Category: Transform
+            Sample Input: object.Transform
+            Expected Output: Local position reset to Vector3.zero
+         */
+        public static void ResetLocalPosition(this Transform t)
+        {
+            t.localPosition = Vector3.zero;
         }
 
         /*
@@ -24,7 +35,7 @@ namespace PerigonGames
          */
         public static void ResetScale(this Transform t)
         {
-            
+            t.localScale = Vector3.one;
         }
 
         /*
@@ -35,7 +46,18 @@ namespace PerigonGames
          */
         public static void ResetRotation(this Transform t)
         {
-            
+            t.eulerAngles = Vector3.zero;
+        }
+        
+        /*
+            Explanation of what it does: resets local rotation
+            Category: Transform
+            Sample Input: object.Transform
+            Expected Output: Local rotation reset to Vector3.zero
+         */
+        public static void ResetLocalRotation(this Transform t)
+        {
+            t.localEulerAngles = Vector3.zero;
         }
 
         /*
@@ -44,9 +66,24 @@ namespace PerigonGames
             Sample Input: object.Transform
             Expected Output: Rotation, Position, Scale should be reset
          */
-        public static void ResetTransform(this Transform t)
+        public static void Reset(this Transform t)
         {
-            
+            t.ResetPosition();
+            t.ResetScale();
+            t.ResetRotation();
+        }
+        
+        /*
+            Explanation of what it does: resets local position, local rotation, and scale of a transform
+            Category: Transform
+            Sample Input: object.Transform
+            Expected Output: Local rotation, Local position, Scale should be reset
+         */
+        public static void ResetLocal(this Transform t)
+        {
+            t.ResetLocalPosition();
+            t.ResetScale();
+            t.ResetLocalRotation();
         }
     }
 }
