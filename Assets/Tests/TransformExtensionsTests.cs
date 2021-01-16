@@ -3,17 +3,23 @@ using NUnit.Framework;
 using PerigonGames;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Tests
 {
     public class TransformExtensionsTests
     {
         private GameObject cube = null;
+        private GameObject cubeParent = null;
         
         [SetUp]
         public void Setup()
         {
             cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cube.name = "child";
+            cubeParent = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            cubeParent.name = "Parent";
         }
 
         [TearDown]
@@ -70,15 +76,19 @@ namespace Tests
         [UnityTest]
         public IEnumerator ResetLocalPositionGoesBackToVector3Zero()
         {
+            cubeParent.transform.position = Vector3.one;
+            cube.transform.SetParent(cubeParent.transform);
+
             //Given
             cube.transform.localPosition = Vector3.one;
-            
+
             //When
             cube.transform.ResetLocalPosition();
             
             //Then
             yield return null;
-            Assert.AreEqual(cube.transform.localPosition, Vector3.zero);
+            Assert.AreEqual(Vector3.zero, cube.transform.localPosition, "Local Position");
+            Assert.AreEqual(Vector3.one, cube.transform.position, "Global Position");
         }
         
         [UnityTest]
@@ -145,11 +155,10 @@ namespace Tests
 
             //When 
             cube.transform.ResetRotation();
-            cube.transform.ResetScale();
 
             //Then
             Assert.AreEqual(Vector3.one, cube.transform.position, "Cube Position Vector3.one");
-            Assert.AreEqual(Vector3.one, cube.transform.localScale, "Cube Local Scale Vector3.one");
+            Assert.AreEqual(Vector3.down, cube.transform.localScale, "Cube Local Scale Vector3.one");
             Assert.AreEqual(Quaternion.Euler(0, 0, 0), cube.transform.rotation, "Cube Local Rotation is Vector3 zero");
             yield return null;
         }
@@ -189,12 +198,11 @@ namespace Tests
             cube.transform.localRotation = Quaternion.Euler(1, 2, 3);
 
             //When 
-            cube.transform.ResetRotation();
-            cube.transform.ResetScale();
+            cube.transform.ResetLocalRotation();
 
             //Then
             Assert.AreEqual(Vector3.one, cube.transform.position, "Cube Position Vector3.one");
-            Assert.AreEqual(Vector3.one, cube.transform.localScale, "Cube Local Scale Vector3.one");
+            Assert.AreEqual(Vector3.down, cube.transform.localScale, "Cube Local Scale Vector3.one");
             Assert.AreEqual(Quaternion.Euler(0, 0, 0), cube.transform.localRotation, "Cube Local Rotation is Vector3 zero");
             yield return null;
         }

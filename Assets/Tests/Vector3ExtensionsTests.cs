@@ -13,7 +13,7 @@ namespace Tests
         public void ResetToVector3Zero()
         {
             var v = new Vector3(0,2,1);
-            v.Reset();
+            v.ResetToZero();
             
             Assert.AreEqual(Vector3.zero, v);
         }

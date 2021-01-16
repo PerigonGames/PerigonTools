@@ -9,8 +9,8 @@ namespace PerigonGames
         Category: Vector3
         Sample Input: object.Transform.position
         Expected Output: vector reset to Vector3.zero
-    */
-        public static void Reset(this ref Vector3 v)
+        */
+        public static void ResetToZero(this ref Vector3 v)
         {
             v = Vector3.zero;
         }
