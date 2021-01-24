@@ -21,7 +21,9 @@ namespace Tests
         {
             _random = null;
         }
-        
+
+        #region CoinFlip
+
         [Test]
         public void CoinFlipShouldGetTrueAndFalseAtLeastOnce()
         {
@@ -38,6 +40,8 @@ namespace Tests
             Assert.Contains(true, listOfBooleans, "Should have coin flipped and gotten true at least once");
             Assert.Contains(false, listOfBooleans, "Should have coin flipped and gotten false at least once");
         }
+
+        #endregion
 
         #region GetRandomElementArray
         [Test]
@@ -375,6 +379,71 @@ namespace Tests
 
             Assert.IsTrue(outputList.Contains(null));
         }
+        
+        #endregion
+
+        #region ShuffleArray
+        
+        [Test]
+        public void ShuffleArrayWithArrayOfInt()
+        {
+            var array = new[] {1, 2, 3};
+            
+            array.Shuffle();
+
+            Assert.IsFalse(array.Length != 3);
+            Assert.Pass();
+        }
+        
+        [Test]
+        public void ShuffleArrayWithArrayOfString()
+        {
+            var array = new[] {"Hello", "There", "String"};
+            
+            array.Shuffle();
+
+            Assert.IsFalse(array.Length != 3);
+            Assert.Pass();
+        }
+        
+        [Test]
+        public void ShuffleArrayNull()
+        {
+            var array = new[] {"Hello", "There", "String"};
+            array = null;
+            
+            array.Shuffle();
+
+            Assert.IsTrue(array == null);
+            Assert.Pass();
+        }
+        
+        [Test]
+        public void ShuffleArrayOfStringsAndNulls()
+        {
+            var array = new[] {null, "There", null};
+
+            array.Shuffle();
+
+            Assert.IsFalse(array.Length != 3);
+            Assert.Pass();
+        }
+        
+        [Test]
+        public void ShuffleEmptyArrayOfStrings()
+        {
+            var array = new string[] { };
+
+            array.Shuffle();
+
+            Assert.IsFalse(array.Length != 0);
+            Assert.Pass();
+        }
+
+        #endregion
+
+        #region ShuffleList
+        
         
         #endregion
     }
