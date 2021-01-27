@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Random = System.Random;
 
 namespace PerigonGames
-{    
+{
     public static class RandomExtensions
     {
         /*

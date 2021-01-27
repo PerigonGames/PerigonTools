@@ -21,7 +21,9 @@ namespace Tests
         {
             _random = null;
         }
-        
+
+        #region CoinFlip
+
         [Test]
         public void CoinFlipShouldGetTrueAndFalseAtLeastOnce()
         {
@@ -38,6 +40,8 @@ namespace Tests
             Assert.Contains(true, listOfBooleans, "Should have coin flipped and gotten true at least once");
             Assert.Contains(false, listOfBooleans, "Should have coin flipped and gotten false at least once");
         }
+
+        #endregion
 
         #region GetRandomElementArray
         [Test]

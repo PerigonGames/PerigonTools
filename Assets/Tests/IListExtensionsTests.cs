@@ -7,7 +7,7 @@ namespace Tests
 {
     public class IListExtensionsTests
     {
-        #region Array
+        #region ArrayNullOrEmpty
         [Test]
         public void TestIsNullOrEmptyIntArray()
         {
@@ -90,7 +90,7 @@ namespace Tests
         }
         #endregion
         
-        #region List
+        #region ListNullOrEmpty
 
         [Test]
         public void TestIsNullOrEmptyIntList()
@@ -171,6 +171,132 @@ namespace Tests
             //Assert
             Assert.True(actualResult);
         }
+        #endregion
+        
+        #region ShuffleArray
+        
+        [Test]
+        public void ShuffleArrayOfInt()
+        {
+            var array = new[] {1, 2, 3};
+            
+            array.ShuffleFisherYates();
+
+            Assert.AreEqual(array.Length, 3);
+            Assert.Contains(1, array);
+            Assert.Contains(2, array);
+            Assert.Contains(3, array);
+        }
+        
+        [Test]
+        public void ShuffleArrayOfString()
+        {
+            var array = new[] {"Hello", "There", "String"};
+            
+            array.ShuffleFisherYates();
+
+            Assert.AreEqual(array.Length, 3);
+            Assert.Contains("Hello", array);
+            Assert.Contains("There", array);
+            Assert.Contains("String", array);
+        }
+        
+        [Test]
+        public void ShuffleNullArray()
+        {
+            var array = new[] {"Hello", "There", "String"};
+            array = null;
+            
+            array.ShuffleFisherYates();
+
+            Assert.IsNull(array);
+        }
+        
+        [Test]
+        public void ShuffleArrayOfStringsAndNulls()
+        {
+            var array = new[] {null, "There", null};
+
+            array.ShuffleFisherYates();
+
+            Assert.AreEqual(array.Length, 3);
+            Assert.Contains(null, array);
+            Assert.Contains("There", array);
+        }
+        
+        [Test]
+        public void ShuffleEmptyArrayOfStrings()
+        {
+            var array = new string[] { };
+
+            array.ShuffleFisherYates();
+
+            Assert.IsEmpty(array);
+        }
+
+        #endregion
+
+        #region ShuffleList
+        
+        [Test]
+        public void ShuffleListOfInt()
+        {
+            var list = new List<int> {1, 2, 3};
+            
+            list.ShuffleFisherYates();
+
+            Assert.AreEqual(list.Count, 3);
+            Assert.Contains(1, list);
+            Assert.Contains(2, list);
+            Assert.Contains(3, list);
+        }
+        
+        [Test]
+        public void ShuffleListOfString()
+        {
+            var list = new List<string> {"Hello", "There", "String"};
+            
+            list.ShuffleFisherYates();
+
+            Assert.AreEqual(list.Count, 3);
+            Assert.Contains("Hello", list);
+            Assert.Contains("There", list);
+            Assert.Contains("String", list);
+        }
+        
+        [Test]
+        public void ShuffleNullList()
+        {
+            var list = new[] {"Hello", "There", "String"};
+            list = null;
+            
+            list.ShuffleFisherYates();
+
+            Assert.IsNull(list);
+        }
+        
+        [Test]
+        public void ShuffleListOfStringsAndNulls()
+        {
+            var list = new List<string> {null, "There", null};
+
+            list.ShuffleFisherYates();
+
+            Assert.AreEqual(list.Count, 3);
+            Assert.Contains(null, list);
+            Assert.Contains("There", list);
+        }
+        
+        [Test]
+        public void ShuffleEmptyListOfStrings()
+        {
+            var array = new List<string> { };
+
+            array.ShuffleFisherYates();
+
+            Assert.IsEmpty(array);
+        }
+        
         #endregion
     }
 }
