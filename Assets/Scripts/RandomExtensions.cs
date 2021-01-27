@@ -1,15 +1,8 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Random = System.Random;
 
 namespace PerigonGames
 {
-    public enum ShuffleStyle
-    {
-        FisherYates,
-        PlaceHolder
-    }
-
     public static class RandomExtensions
     {
         /*
@@ -40,39 +33,6 @@ namespace PerigonGames
 
             element = list[random.Next(0, list.Count)];
             return true;
-        }
-
-        public static void Shuffle<T>(this IList<T> list, ShuffleStyle style = ShuffleStyle.FisherYates)
-        {
-            if (list.IsNullOrEmpty())
-            {
-                return;
-            }
-
-            switch (style)
-            {
-                case ShuffleStyle.FisherYates:
-                    FisherYatesShuffle(ref list);
-                    break;
-                case ShuffleStyle.PlaceHolder:
-                    Debug.Log("PlaceHolder Shuffle");
-                    break;
-                default:
-                    return;
-            }
-        }
-
-        private static void FisherYatesShuffle<T>(ref IList<T> list)
-        {
-            int count = list.Count;
-
-            for (int i = 0; i < (count - 1); i++)
-            {
-                int index = i + new Random().Next(count - i);
-                T element = list[index];
-                list[index] = list[i];
-                list[i] = element;
-            }
         }
     }
 }
