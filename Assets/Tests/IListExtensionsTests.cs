@@ -209,7 +209,7 @@ namespace Tests
             
             array.ShuffleFisherYates();
 
-            Assert.IsTrue(array == null);
+            Assert.IsNull(array);
         }
         
         [Test]
@@ -231,7 +231,7 @@ namespace Tests
 
             array.ShuffleFisherYates();
 
-            Assert.AreEqual(array.Length, 0);
+            Assert.IsEmpty(array);
         }
 
         #endregion
@@ -272,7 +272,7 @@ namespace Tests
             
             list.ShuffleFisherYates();
 
-            Assert.IsTrue(list == null);
+            Assert.IsNull(list);
         }
         
         [Test]
@@ -294,7 +294,7 @@ namespace Tests
 
             array.ShuffleFisherYates();
 
-            Assert.AreEqual(array.Count, 0);
+            Assert.IsEmpty(array);
         }
         
         #endregion
