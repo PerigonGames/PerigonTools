@@ -1,0 +1,14 @@
+{
+  "name": "com.perigongames.perigon-tools",
+  "version": "1.0.0",
+  "displayName": "Perigon Games Tools",
+  "description": "Generic Tools for Game Development",
+  "keywords": [
+    "library",
+    "utilities"
+  ],
+  "author": {
+    "name": "Perigon Games"
+  },
+  "type": "tool"
+}
