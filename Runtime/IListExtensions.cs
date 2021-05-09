@@ -29,10 +29,8 @@ namespace PerigonGames
             {
                 return default(T);
             }
-            else
-            {
-                return list[index];
-            }
+            
+            return list[index];
         }
 
         /// <summary>
