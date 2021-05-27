@@ -29,7 +29,7 @@ namespace PerigonGames
             {
                 return default(T);
             }
-            
+
             return list[index];
         }
 
